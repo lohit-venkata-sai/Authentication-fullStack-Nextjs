@@ -9,7 +9,7 @@ connect()
 export async function POST(request) {
     try {
         //covert userdata to json data such that it can be stored/posted in the db
-        const reqBody = await request.json()
+        const reqBody = await request.json();
         console.log(reqBody);
         const { username, email, password } = reqBody;
         //check if email already exists in the db

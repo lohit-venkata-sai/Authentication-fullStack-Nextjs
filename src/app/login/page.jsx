@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation'
 import axios from 'axios';
 
 
@@ -14,17 +13,16 @@ const page = () => {
     password: ''
   })
   const [loading,setLoading]  = useState(false)
-  async function onLogin(params) {
+  async function onLogin() {
     try{
       setLoading(true);
-      const response  =await axios.push('/api/users/login',user);
+      const response  =await axios.post('/api/users/login',user);
       console.log('login successful',response.data);
-      toast.success('login successful');
+      router.push('/profile');
     }
     catch(e){
       setLoading(false);
       console.log(e.message);
-      toast.error(error.message);
     }
     finally{
       setLoading(false)
@@ -32,7 +30,7 @@ const page = () => {
   }
   return (
     <div className='flex flex-col bg-teal-400 text-black items-center justify-center min-h-screen py-2'>
-      <h1 className='text-2xl mb-2 font-bold'>Login Page</h1>
+      <h1 className='text-2xl mb-2 font-bold'>{loading? 'processing....': 'Login'}</h1>
       <hr />
       <label className='font-semibold' htmlFor='email'>Email :</label>
       <input className='p-1 mb-6 rounded-md' type="email" id='email' name='email' value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} placeholder='abc@example.com' />
