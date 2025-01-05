@@ -4,7 +4,6 @@ import React,{useState} from 'react'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 import axios from 'axios';
-import toast from 'react-hot-toast';
 
 const page = () => {
   const route  =useRouter()
@@ -20,12 +19,9 @@ const page = () => {
       const response = await axios.post('/api/users/signup',user);
       console.log('signup successful');
       route.push('/login');
-      toast.success("sign in successfull");
     }
     catch(e){
       console.log('signup failed',e.message);
-      toast.error(e.message);
-    }
     finally{
       setIsLoading(false);
     }

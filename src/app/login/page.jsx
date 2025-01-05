@@ -17,7 +17,7 @@ const page = () => {
     try{
       setLoading(true);
       const response  =await axios.post('/api/users/login',user);
-      console.log('login successful',response.data);
+      console.log('log in successful',response.data);
       router.push('/profile');
     }
     catch(e){
