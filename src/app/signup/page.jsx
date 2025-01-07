@@ -13,15 +13,16 @@ const page = () => {
     email: '',
     password: ''
   })
-  async function onSignup(params) {
+  async function onSignup() {
     try{
       setIsLoading(true);
       const response = await axios.post('/api/users/signup',user);
-      console.log('signup successful');
+      console.log('signup successful',response.data);
       route.push('/login');
     }
     catch(e){
       console.log('signup failed',e.message);
+    }
     finally{
       setIsLoading(false);
     }

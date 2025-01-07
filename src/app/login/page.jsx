@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 import axios from 'axios';
 
-
 const page = () => {
   const router  =useRouter()
   const [user, setUser] = useState({
@@ -17,12 +16,15 @@ const page = () => {
     try{
       setLoading(true);
       const response  =await axios.post('/api/users/login',user);
+      console.log(response);
       console.log('log in successful',response.data);
-      router.push('/profile');
+      if (response.data.success){
+        router.push('/profile');
+     }
     }
-    catch(e){
+    catch(error){
       setLoading(false);
-      console.log(e.message);
+      console.log(error.message);
     }
     finally{
       setLoading(false)
