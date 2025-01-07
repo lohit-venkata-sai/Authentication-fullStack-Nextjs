@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
 
 export function middleware(request){
-    const path = request.nexturl.pathname;
+    const path = request.nextUrl.pathname;
     const isPublicPath = path==='/login' || path ==='/signup';
 
     const token  = request.cookies.get('token')?.value || '';
 
     if(isPublicPath && token){
-        return NextResponse.redirect('/profile');
+        return NextResponse.redirect(new URL('/profile',request.nextUrl));
     }
 
     if(!isPublicPath && !token){
-        return  NextResponse.redirect('/login');
+        return  NextResponse.redirect(new URL('/login',request.nextUrl));
     }
     return NextResponse.next();
 }
@@ -21,6 +21,7 @@ export const config={
         '/',
         '/login',
         '/signup',
-        '/profile'
+        '/profile',
+        '/profile/:id*'
     ]
 }
