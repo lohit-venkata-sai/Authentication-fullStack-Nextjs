@@ -9,7 +9,7 @@ connect();
 export async function GET(request){
     try{
         const { id }  =await getUserTokenData(request);
-        const user = await User.findOne({_id : id});
+        const user = await User.findOne({_id : id}).select('-password');
         console.log(user);
         return NextResponse.json({
             message : 'User data fetched successfully',

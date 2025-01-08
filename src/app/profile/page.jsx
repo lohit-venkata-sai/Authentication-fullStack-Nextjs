@@ -8,7 +8,7 @@ const page = () => {
   async function getDetails(){
     try {
       const response = await axios.get('/api/users/me');
-      const {data} = await response.data;
+      const {data} = response.data;
       console.log(data.message);
 
       if(data?._id){
@@ -16,7 +16,6 @@ const page = () => {
       }
     } catch (error) {
       console.log(error.message);
-      throw new Error(error.message);
     }
   }
   async function onLogout(){
