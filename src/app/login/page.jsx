@@ -41,6 +41,7 @@ const page = () => {
       <input className='p-1 mb-6 rounded-md' type="password" id='password' name='password' value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} placeholder='password' />
 
       <button className='bg-violet-600 px-2 py-1 text-white cursor-pointer rounded-md' onClick={onLogin}>Login</button>
+      <Link className='text-underlined' href="/forgotpassword">Forgot Password</Link>
       <Link className='text-red-900' href='/signup'>click here to signup</Link>
     </div>
   )

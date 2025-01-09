@@ -1,4 +1,5 @@
 import { connect } from "@/dbConfig/dbConfig";
+import { sendMail } from "@/helpers/mailer";
 
 import User from "@/models/userModel";
 
@@ -27,7 +28,11 @@ export async function POST(request) {
         const userToBeSaved = new User({ username, email, password: hashedPassword });
         console.log(userToBeSaved);
         const savedUser = await userToBeSaved.save();
+        console.log("saved user is");
         console.log(savedUser);
+
+        //send verification email 
+        await sendMail({email,emailType:"VERIFY",userId:savedUser._id});
 
         return new Response(JSON.stringify({ message: 'user created successfully', success: true, savedUser }), { status: 200 });
 
